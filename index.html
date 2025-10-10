@@ -1,34 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cylandea</title>
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cylandea — Apps with a Spark</title>
+  <meta name="description" content="Cylandea Systems LLC crafts playful, helpful, and kid‑friendly apps." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-0:#080b12;         /* deep night */
+      --bg-1:#0d1221;         /* piltover blue */
+      --ink-0:#e6f1ff;        /* soft white */
+      --ink-1:#9fb2c9;        /* muted text */
+      --accent:#00e6ff;       /* hextech blue */
+      --accent-2:#d9b36b;     /* arcane gold */
+      --accent-3:#8a5eff;     /* shimmer violet */
+      --glass: rgba(13,18,33,.45);
+      --border: rgba(255,255,255,.12);
+      --radius: 20px;
+      --shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px var(--border);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background: radial-gradient(1200px 800px at 70% -20%, rgba(0,230,255,.08), transparent 60%),
+                 radial-gradient(1000px 600px at -10% 10%, rgba(138,94,255,.08), transparent),
+                 linear-gradient(180deg,var(--bg-1),var(--bg-0));
+      color:var(--ink-0);
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+
+    /* starfield canvas sits under content */
+    #stars{position:fixed;inset:0;z-index:-1;}
+
+    header{
+      position:sticky;top:0;backdrop-filter: blur(8px); background:rgba(8,11,18,.4);
+      border-bottom:1px solid var(--border);
+      z-index:10;
+    }
+    .nav{
+      max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:14px 20px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink-0)}
+    .brand img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,230,255,.35))}
+    .brand span{font-family:Cinzel,serif;font-weight:700;letter-spacing:.06em}
+    .cta{
+      margin-left:auto; text-decoration:none; color:#061019;background:linear-gradient(135deg,var(--accent),#4cf8ff);
+      padding:10px 16px;border-radius:999px;font-weight:800; box-shadow:0 8px 25px rgba(0,230,255,.25);
+      transition:transform .2s ease, box-shadow .2s ease; border:0;
+    }
+    .cta:hover{transform:translateY(-1px);box-shadow:0 14px 35px rgba(0,230,255,.35)}
+
+    .hero{
+      max-width:1100px;margin:0 auto;padding:80px 20px 60px; display:grid; gap:28px; align-items:center;
+    }
+    .hero .logo{
+      width:120px;height:120px;border-radius:50%;display:grid;place-items:center;margin:0 auto 10px; 
+      background:radial-gradient(circle at 30% 30%, rgba(0,230,255,.22), transparent 45%),
+                 linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+    }
+    .hero .logo img{width:70%;height:70%;object-fit:contain;opacity:.95}
+
+    h1{
+      margin:0; text-align:center; font-family:Cinzel,serif; font-weight:700; font-size: clamp(32px, 6vw, 60px);
+      line-height:1.15; letter-spacing:.02em;
+      background:linear-gradient(92deg,var(--ink-0),var(--accent-2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow: 0 0 18px rgba(217,179,107,.15);
+    }
+    .tagline{max-width:720px;margin:8px auto 0;text-align:center;color:var(--ink-1)}
+
+    .grid{
+      max-width:1100px; margin:20px auto 80px; padding:0 20px; display:grid; gap:18px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card{
+      grid-column: span 12; padding:22px; border-radius:var(--radius); background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow: var(--shadow); position:relative; overflow:hidden; isolation:isolate;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .card:hover{ transform: translateY(-3px); box-shadow: 0 22px 60px rgba(0,0,0,.55), inset 0 0 0 1px var(--border);} 
+    .card h3{margin:4px 0 6px; font-family:Cinzel,serif; letter-spacing:.05em}
+    .card p{margin:0;color:var(--ink-1)}
+    .chip{display:inline-flex;align-items:center; gap:8px; font-size:12px; padding:6px 10px;border-radius:999px;border:1px solid var(--border);
+      background:rgba(4,12,22,.35); color:var(--ink-0)}
+    .chips{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+
+    .hexline{position:absolute; inset:auto 0 0; height:3px; background:linear-gradient(90deg, transparent, var(--accent), transparent); filter: drop-shadow(0 0 10px rgba(0,230,255,.4)); opacity:.6}
+
+    /* layout for three cards */
+    @media (min-width:780px){
+      .card{grid-column: span 4}
+    }
+
+    /* Showcase section */
+    .showcase{max-width:1100px;margin:0 auto 90px;padding:0 20px}
+    .frame{
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow:hidden; position:relative;
+    }
+    .slides{display:grid; grid-auto-flow: column; grid-auto-columns:100%; scroll-snap-type:x mandatory; overflow-x:auto; scrollbar-width:none}
+    .slides::-webkit-scrollbar{display:none}
+    .slide{scroll-snap-align:start; position:relative; height:min(60vh,520px); display:grid; place-items:center}
+    .slide img{ width:100%; height:100%; object-fit:cover; filter:saturate(1.05) contrast(1.05) brightness(.95)}
+    .caption{position:absolute; inset:auto 16px 16px 16px; padding:12px 16px; border-radius:12px; background:rgba(8,12,18,.55);
+      border:1px solid var(--border); color:var(--ink-0); font-size:14px}
+
+    /* Contact */
+    .contact{max-width:900px;margin:0 auto 80px;padding:0 20px;text-align:center}
+    .contact a{color:var(--accent); font-weight:700; text-decoration:none}
+
+    footer{border-top:1px solid var(--border); color:var(--ink-1); text-align:center; padding:28px}
+
+    /* small decorative runes */
+    .runes{position:absolute; inset:0; pointer-events:none; opacity:.25; background-image:radial-gradient(2px 2px at 8% 30%, var(--accent), transparent 60%), radial-gradient(2px 2px at 82% 70%, var(--accent-3), transparent 60%)}
+  </style>
 </head>
 <body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#">
+        <img src="cylandea_logo.png" alt="Cylandea logo"/>
+        <span>Cylandea Systems LLC</span>
+      </a>
+      <a class="cta" href="mailto:support@cylandea.com">Contact</a>
+    </div>
+  </header>
 
-<img src="cylandea_logo.png" alt="Cylandea Logo" width="200">
+  <main>
+    <section class="hero" id="home">
+      <div class="logo"><img src="cylandea_logo.png" alt="Cylandea"/></div>
+      <h1>Apps with Wonder, Built for Everyone</h1>
+      <p class="tagline">We craft iOS experiences across <strong>games</strong>, <strong>well‑being</strong>, and <strong>kids</strong> simple interfaces, imaginative worlds, and a touch of Hextech sparkle.</p>
+    </section>
 
-  <h1>Cylandea Systems LLC</h1>
+    <section class="grid" id="what-we-make" aria-label="What we make">
+      <article class="card">
+        <div class="hexline"></div>
+        <h3>Games</h3>
+        <p>Playful worlds with tight controls and bold visuals.</p>
+        <div class="chips">
+          <span class="chip">Arcade • Puzzle</span>
+          <span class="chip">Offline‑friendly</span>
+        </div>
+        <div class="runes"></div>
+      </article>
+      <article class="card">
+        <div class="hexline"></div>
+        <h3>Well‑Being</h3>
+        <p>Lightweight self‑help tools for focus, habit‑building, and calm.</p>
+        <div class="chips">
+          <span class="chip">Timers • Journals</span>
+          <span class="chip">Privacy‑first</span>
+        </div>
+        <div class="runes"></div>
+      </article>
+      <article class="card">
+        <div class="hexline"></div>
+        <h3>For Kids</h3>
+        <p>Delightful, parent‑approved learning and play safe by design.</p>
+        <div class="chips">
+          <span class="chip">Ages 3–10</span>
+          <span class="chip">No accounts</span>
+        </div>
+        <div class="runes"></div>
+      </article>
+    </section>
 
-  <!-- Description paragraph -->
-   
-    <p>Welcome to the Cylandea Systems LLC website. We specialize in ios app development.</p>
+    <!-- Showcase: replace src paths with your own images -->
+    <!-- <section class="showcase" id="showcase">
+      <div class="frame">
+        <div class="slides" aria-label="Showcase">
+          <figure class="slide">
+            <img src="images/arcane-hero-1.jpg" alt="Cosmic hand holding a glowing core" />
+            <figcaption class="caption">Cinematic key art vibe for game splash screens.</figcaption>
+          </figure>
+          <figure class="slide">
+            <img src="images/arcane-hero-2.jpg" alt="Golden portal and silhouette" />
+            <figcaption class="caption">Light‑on‑dark palette with gold accents and soft bloom.</figcaption>
+          </figure>
+          <figure class="slide">
+            <img src="images/arcane-hero-3.jpg" alt="Runic spell circle in blue" />
+            <figcaption class="caption">Subtle runes and geometric glyphs used as UI flourishes.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section> -->
 
-    <!-- contact -->
-    <p>Contact us at: <a href="mailto:support@cylandea.com">support@cylandea.com</a></p>
-      
-    <footer>
-        <p>&copy; 2025 Cylandea Systems LLC. All rights reserved.</p>
-    </footer>
-    
+    <section class="contact" id="contact">
+      <p>Want to collaborate or need support? Email <a href="mailto:support@cylandea.com">support@cylandea.com</a></p>
+    </section>
+  </main>
 
+  <footer>
+    © <span id="year"></span> Cylandea Systems LLC. All rights reserved.
+  </footer>
 
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
+    // minimal starfield / particles
+    const c = document.getElementById('stars');
+    const ctx = c.getContext('2d');
+    let w, h, stars=[];
+    const COUNT = 160; // keep subtle
+    function resize(){ w = c.width = innerWidth; h = c.height = innerHeight; }
+    addEventListener('resize', resize); resize();
+    function makeStar(){
+      return { x: Math.random()*w, y: Math.random()*h, z: Math.random()*0.8 + 0.2, s: Math.random()*1.3+0.2, v: Math.random()*0.3+0.1 };
+    }
+    for(let i=0;i<COUNT;i++) stars.push(makeStar());
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of stars){
+        p.y += p.v; if(p.y>h) { p.x=Math.random()*w; p.y=-10; }
+        ctx.globalAlpha = p.z; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, Math.PI*2); ctx.fillStyle = '#8bd8ff'; ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
 
-  <!-- Link to external JavaScript -->
-  <script src="script.js"></script>
+    // keyboard navigation (simple)
+    document.addEventListener('keydown', e=>{
+      if(e.key.toLowerCase()==='s'){
+        document.querySelector('#showcase .slides').scrollBy({left:innerWidth, behavior:'smooth'});
+      }
+    });
+  </script>
 </body>
-</html
+</html>

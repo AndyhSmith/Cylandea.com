@@ -1,0 +1,207 @@
+/* site.css: shared theme for cylandea.com
+   Dark "hextech" shell shared by the homepage and per-app pages. */
+
+:root{
+  --bg-0:#080b12;          /* deep night */
+  --bg-1:#0d1221;          /* piltover blue */
+  --ink-0:#e6f1ff;         /* soft white */
+  --ink-1:#9fb2c9;         /* muted text */
+  --accent:#00e6ff;        /* hextech blue */
+  --accent-2:#d9b36b;      /* arcane gold */
+  --accent-3:#8a5eff;      /* shimmer violet */
+  --border: rgba(255,255,255,.12);
+  --radius: 20px;
+  --shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px var(--border);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{height:100%}
+body{
+  margin:0;
+  background: radial-gradient(1200px 800px at 70% -20%, rgba(0,230,255,.08), transparent 60%),
+              radial-gradient(1000px 600px at -10% 10%, rgba(138,94,255,.08), transparent),
+              linear-gradient(180deg,var(--bg-1),var(--bg-0));
+  color:var(--ink-0);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:var(--accent)}
+
+/* starfield canvas sits under content */
+#stars{position:fixed;inset:0;z-index:-1;}
+
+/* ---------- header / nav ---------- */
+header{
+  position:sticky;top:0;backdrop-filter: blur(8px); background:rgba(8,11,18,.4);
+  border-bottom:1px solid var(--border); z-index:10;
+}
+.nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:14px 20px;}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink-0)}
+.brand img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,230,255,.35))}
+.brand span{font-family:Cinzel,serif;font-weight:700;letter-spacing:.06em}
+.nav-links{margin-left:auto;display:flex;align-items:center;gap:22px}
+.nav-links a{color:var(--ink-1);text-decoration:none;font-weight:600;font-size:15px;transition:color .2s}
+.nav-links a:hover{color:var(--ink-0)}
+.nav .cta{
+  text-decoration:none; color:#061019;background:linear-gradient(135deg,var(--accent),#4cf8ff);
+  padding:9px 16px;border-radius:999px;font-weight:800; box-shadow:0 8px 25px rgba(0,230,255,.25);
+  transition:transform .2s ease, box-shadow .2s ease; border:0;
+}
+.nav .cta:hover{transform:translateY(-1px);box-shadow:0 14px 35px rgba(0,230,255,.35)}
+
+/* ---------- generic layout ---------- */
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+.section-head{max-width:1100px;margin:64px auto 8px;padding:0 20px}
+.section-head h2{font-family:Cinzel,serif;letter-spacing:.04em;font-size:clamp(24px,4vw,34px);margin:0}
+.section-head p{color:var(--ink-1);margin:6px 0 0;max-width:720px}
+
+/* ---------- hero ---------- */
+.hero{max-width:1100px;margin:0 auto;padding:80px 20px 30px;display:grid;gap:22px;align-items:center}
+.hero .logo{
+  width:120px;height:120px;border-radius:50%;display:grid;place-items:center;margin:0 auto 4px;
+  background:radial-gradient(circle at 30% 30%, rgba(0,230,255,.22), transparent 45%),
+             linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow: var(--shadow);
+}
+.hero .logo img{width:70%;height:70%;object-fit:contain;opacity:.95}
+h1{
+  margin:0;text-align:center;font-family:Cinzel,serif;font-weight:700;font-size:clamp(32px,6vw,60px);
+  line-height:1.15;letter-spacing:.02em;
+  background:linear-gradient(92deg,var(--ink-0),var(--accent-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 18px rgba(217,179,107,.15);
+}
+.tagline{max-width:720px;margin:6px auto 0;text-align:center;color:var(--ink-1)}
+
+/* ---------- app cards (homepage) ---------- */
+.apps{
+  max-width:1100px;margin:20px auto 40px;padding:0 20px;display:grid;gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+}
+.app-card{
+  display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  padding:22px;border-radius:var(--radius);
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow:var(--shadow);position:relative;overflow:hidden;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.app-card:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(0,0,0,.55), inset 0 0 0 1px var(--border)}
+.app-card .hexline{position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(90deg,transparent,var(--accent),transparent);filter:drop-shadow(0 0 10px rgba(0,230,255,.4));opacity:.6}
+.app-head{display:flex;align-items:center;gap:14px}
+.app-head img{width:62px;height:62px;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+.app-head h3{margin:0;font-family:Cinzel,serif;letter-spacing:.03em;font-size:20px}
+.app-head .kicker{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:.02em}
+.app-card p{color:var(--ink-1);margin:14px 0 0;flex:1}
+/* homepage card preview: a filmstrip that nudges forward now and then */
+.app-shot{height:300px;margin:18px 0 4px;overflow:hidden;border-radius:14px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.app-track{display:flex;gap:12px;height:100%;width:max-content}
+.app-track img{height:100%;width:auto;border-radius:12px;border:1px solid var(--border);background:#0a0f1a;box-shadow:0 8px 20px rgba(0,0,0,.45);pointer-events:none}
+.app-foot{display:flex;align-items:center;gap:12px;margin-top:16px}
+.app-foot .more{margin-left:auto;color:var(--accent);font-weight:700;font-size:14px}
+
+/* ---------- badges & buttons ---------- */
+.badge{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;border:1px solid var(--border)}
+.badge-live{color:#062019;background:linear-gradient(135deg,#5ef0c0,#00e6ff)}
+.badge-soon{color:var(--accent-2);background:rgba(217,179,107,.12);border-color:rgba(217,179,107,.35)}
+.btn-store{
+  display:inline-flex;align-items:center;gap:10px;text-decoration:none;
+  color:#fff;background:#000;border:1px solid rgba(255,255,255,.25);
+  padding:10px 18px;border-radius:12px;font-weight:600;line-height:1.1;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.btn-store:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(0,0,0,.5)}
+.btn-store svg{width:22px;height:22px;flex:none}
+.btn-store .small{display:block;font-size:11px;font-weight:500;opacity:.85}
+.btn-store .big{display:block;font-size:17px;font-weight:600;margin-top:-2px}
+.btn-soon{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--accent-2);background:rgba(217,179,107,.10);
+  border:1px dashed rgba(217,179,107,.45);padding:12px 18px;border-radius:12px;font-weight:700;
+}
+
+/* ---------- app page ---------- */
+.app-hero{max-width:1000px;margin:0 auto;padding:56px 20px 10px;display:grid;gap:18px;justify-items:center;text-align:center}
+.app-hero .icon{width:104px;height:104px;border-radius:24px;box-shadow:0 14px 40px rgba(0,0,0,.55)}
+.app-hero .kicker{color:var(--accent);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+.app-hero .pitch{max-width:680px;color:var(--ink-1);margin:0}
+.crumbs{max-width:1000px;margin:0 auto;padding:14px 20px 0;font-size:14px;color:var(--ink-1)}
+.crumbs a{color:var(--ink-1);text-decoration:none}
+.crumbs a:hover{color:var(--ink-0)}
+
+/* gallery: one scrolling row, screenshots shown true-to-life, no crop or filter */
+.gallery{
+  display:flex;flex-wrap:nowrap;gap:22px;overflow-x:auto;
+  padding:30px 20px;margin:10px auto 0;max-width:1100px;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.gallery::-webkit-scrollbar{display:none}
+.gallery figure{margin:0;flex:0 0 auto;width:230px;text-align:center;scroll-snap-align:center;
+  cursor:pointer;transition:transform .2s ease}
+.gallery figure:hover{transform:translateY(-4px)}
+.gallery.dragging,.gallery.dragging figure{cursor:grabbing}
+.gallery img{
+  width:100%;height:auto;border-radius:22px;object-fit:contain;
+  border:1px solid var(--border);box-shadow:0 16px 40px rgba(0,0,0,.5);background:#0a0f1a;
+}
+.gallery figcaption{color:var(--ink-1);font-size:13px;margin-top:10px}
+
+/* Apple Watch showcase (Taploom) */
+.watch{max-width:920px;margin:24px auto 0;padding:0 20px;display:flex;gap:36px;align-items:center;flex-wrap:wrap;justify-content:center}
+.watch-device{position:relative;flex:0 0 auto;width:158px;height:190px;border-radius:46px;display:grid;place-items:center;
+  background:linear-gradient(160deg,#2a2f3a,#0c0f16);
+  box-shadow:0 18px 50px rgba(0,0,0,.6), inset 0 0 0 2px rgba(255,255,255,.06)}
+.watch-crown{position:absolute;right:-5px;top:50%;transform:translateY(-50%);width:8px;height:34px;border-radius:6px;
+  background:linear-gradient(180deg,#3a3f4a,#15181f);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.watch-screen{width:122px;height:150px;border-radius:34px;background:#05080e;display:grid;place-items:center;overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.watch-screen img{width:76px;height:76px;border-radius:18px}
+.watch-copy{flex:1 1 320px;max-width:520px}
+.watch-copy p{margin:0 0 12px;color:var(--ink-1)}
+.watch-copy ul{margin:0 0 12px;padding-left:18px;color:var(--ink-1)}
+.watch-copy li{margin:6px 0}
+.watch-copy strong{color:var(--ink-0)}
+.watch-note{font-size:14px;opacity:.85}
+
+/* features */
+.features{max-width:920px;margin:30px auto 10px;padding:0 20px;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.feature{
+  padding:18px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+}
+.feature h3{margin:0 0 4px;font-size:16px;font-family:Cinzel,serif;letter-spacing:.02em}
+.feature p{margin:0;color:var(--ink-1);font-size:14px}
+
+/* "more apps" strip */
+.more-apps{max-width:1100px;margin:60px auto 0;padding:0 20px}
+.more-apps .row{display:flex;gap:14px;flex-wrap:wrap}
+.more-apps a{
+  display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink-0);
+  padding:12px 16px;border-radius:14px;border:1px solid var(--border);
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));transition:transform .2s}
+.more-apps a:hover{transform:translateY(-2px)}
+.more-apps img{width:42px;height:42px;border-radius:10px}
+.more-apps b{display:block}
+.more-apps span{color:var(--ink-1);font-size:13px}
+
+/* ---------- contact / footer ---------- */
+.contact{max-width:900px;margin:70px auto 0;padding:0 20px;text-align:center;color:var(--ink-1)}
+.contact a{color:var(--accent);font-weight:700;text-decoration:none}
+footer{border-top:1px solid var(--border);color:var(--ink-1);text-align:center;padding:30px 20px;margin-top:70px}
+footer .flinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+footer .flinks a{color:var(--ink-1);text-decoration:none}
+footer .flinks a:hover{color:var(--ink-0)}
+
+@media (max-width:520px){
+  .nav-links{gap:14px}
+  .nav-links .hide-sm{display:none}
+}
+
+/* respect reduced-motion: the starfield script checks this too */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important}
+}

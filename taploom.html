@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taploom: Minimalist Ripple Puzzle Game for iPhone | Cylandea</title>
+  <meta name="description" content="Taploom is a minimalist iOS puzzle game: tap a tile, send a ripple through the grid, and fill every tile in as few moves as possible. 55 hand-crafted levels, a daily puzzle, endless mode, and a built-in level editor. No ads, no tracking." />
+  <link rel="canonical" href="https://cylandea.com/taploom.html" />
+  <meta name="apple-itunes-app" content="app-id=6768846118" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Cylandea" />
+  <meta property="og:title" content="Taploom: Minimalist Ripple Puzzle" />
+  <meta property="og:description" content="Tap a tile, watch the color ripple outward, and fill every tile in as few moves as you can. 55 levels, a daily puzzle, and a built-in editor." />
+  <meta property="og:url" content="https://cylandea.com/taploom.html" />
+  <meta property="og:image" content="https://cylandea.com/apps/taploom/taploom-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Taploom: Minimalist Ripple Puzzle" />
+  <meta name="twitter:description" content="Tap a tile, send a ripple through the grid, and fill every tile in as few moves as you can." />
+  <meta name="twitter:image" content="https://cylandea.com/apps/taploom/taploom-og.png" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+  <meta name="theme-color" content="#0d1221">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Taploom",
+    "operatingSystem": "iOS",
+    "applicationCategory": "GameApplication",
+    "description": "A minimalist ripple puzzle: tap a tile, send a wave through the grid, and fill every tile in as few moves as possible. 55 hand-crafted levels, a daily puzzle, endless mode, and a built-in level editor.",
+    "image": "https://cylandea.com/apps/taploom/taploom-icon.png",
+    "screenshot": "https://cylandea.com/apps/taploom/taploom-gameplay.png",
+    "url": "https://cylandea.com/taploom.html",
+    "downloadUrl": "https://apps.apple.com/app/id6768846118",
+    "author": { "@type": "Organization", "name": "Cylandea Systems LLC", "url": "https://cylandea.com/" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <header>
+    <div class="nav">
+      <a class="brand" href="index.html">
+        <img src="cylandea_logo.png" alt="Cylandea logo" width="36" height="36"/>
+        <span>Cylandea</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html#apps">Apps</a>
+        <a class="hide-sm" href="support.html">Support</a>
+        <a class="cta" href="mailto:support@cylandea.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="index.html">Home</a> › Taploom
+  </nav>
+
+  <main>
+    <section class="app-hero">
+      <img class="icon" src="apps/taploom/taploom-icon.png" alt="Taploom app icon" width="104" height="104"/>
+      <span class="kicker">Minimalist Puzzle · iOS</span>
+      <h1>Taploom</h1>
+      <p class="pitch">Tap a tile. Watch the color ripple outward. Drain every tile on the board. Taploom is a calm, minimalist puzzle built around one simple idea, <strong>every tap sends a wave through the grid</strong>, and the art of solving each board in as few moves as you can.</p>
+      <a class="btn-store" href="https://apps.apple.com/app/id6768846118">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.74-1.517.03-2.01-.88-3.71-.88-1.706 0-2.246.85-3.674.91-1.43.05-2.514-1.45-3.498-2.78-1.998-2.78-3.521-7.86-1.473-11.29 1.018-1.71 2.78-2.79 4.681-2.82 1.45-.03 2.83.96 3.71.96.88 0 2.553-1.19 4.31-1.01.73.03 2.78.3 4.1 2.23-.105.07-2.447 1.42-2.42 4.26.03 3.39 2.96 4.51 3 4.53z"/></svg>
+        <span><span class="small">Download on the</span><span class="big">App Store</span></span>
+      </a>
+    </section>
+
+    <section class="gallery" aria-label="Taploom screenshots">
+      <figure>
+        <img src="apps/taploom/taploom-home.png" alt="Taploom home screen with Play, Endless, Editor and Settings" width="720" height="1558" loading="lazy" decoding="async"/>
+        <figcaption>Tap to spread · fill every tile</figcaption>
+      </figure>
+      <figure>
+        <img src="apps/taploom/taploom-gameplay.png" alt="Taploom puzzle level showing a ripple spreading across the grid" width="720" height="1558" loading="lazy" decoding="async"/>
+        <figcaption>Plan your taps, chain the ripples</figcaption>
+      </figure>
+      <figure>
+        <img src="apps/taploom/taploom-obstacles.png" alt="Advanced Taploom level with mirrors, prisms, locks and other obstacles" width="720" height="1558" loading="lazy" decoding="async"/>
+        <figcaption>Mirrors, prisms, bombs and more</figcaption>
+      </figure>
+      <figure>
+        <img src="apps/taploom/taploom-editor.png" alt="Taploom built-in level editor" width="720" height="1558" loading="lazy" decoding="async"/>
+        <figcaption>Design your own puzzles</figcaption>
+      </figure>
+      <figure>
+        <img src="apps/taploom/taploom-levels.png" alt="Taploom level select map showing 55 levels" width="720" height="1558" loading="lazy" decoding="async"/>
+        <figcaption>55 levels across 11 themed rows</figcaption>
+      </figure>
+    </section>
+
+    <div class="section-head"><h2>Features</h2></div>
+    <section class="features">
+      <div class="feature"><h3>55 hand-crafted levels</h3><p>Eleven themed rows, each introducing a new tile that changes how the ripple flows.</p></div>
+      <div class="feature"><h3>A fresh daily puzzle</h3><p>The same seed for every player worldwide, compare your solution against the world.</p></div>
+      <div class="feature"><h3>Endless mode</h3><p>Seeded levels you can replay whenever you want one more.</p></div>
+      <div class="feature"><h3>Built-in level editor</h3><p>Design, save and test your own puzzles with the full toolbox of tiles.</p></div>
+      <div class="feature"><h3>A growing toolbox</h3><p>Amplifiers, mirrors, bombs, teleporters, prisms, locked tiles, infection tiles and more.</p></div>
+      <div class="feature"><h3>Three-star scoring</h3><p>Clear the board, then chase the elegant minimum-move solution.</p></div>
+      <div class="feature"><h3>One-handed by design</h3><p>Fully portrait, precise enough for a thumb on the bus, slow enough to think on the couch.</p></div>
+      <div class="feature"><h3>No ads, no tracking</h3><p>No accounts, no in-app purchases, no internet required. Just the puzzle.</p></div>
+    </section>
+
+    <div class="section-head"><h2>Also on Apple Watch</h2></div>
+    <section class="watch">
+      <div class="watch-device" aria-hidden="true">
+        <span class="watch-crown"></span>
+        <div class="watch-screen"><img src="apps/taploom/taploom-watch-icon.png" alt="" width="110" height="110"/></div>
+      </div>
+      <div class="watch-copy">
+        <p>Taploom comes with a companion <strong>Apple Watch</strong> app, a focused, streamlined take on the puzzle built for quick taps on your wrist.</p>
+        <ul>
+          <li><strong>Endless puzzles:</strong> a steady stream of seeded boards to solve, one after another.</li>
+          <li><strong>Pick your tiles:</strong> choose which special tiles can appear in your run.</li>
+          <li><strong>Stars on the go:</strong> your watch runs track stars just like the phone.</li>
+          <li><strong>Made for the wrist:</strong> crisp haptics on every tap and clear, no setup, just play.</li>
+        </ul>
+        <p class="watch-note">The Watch app keeps things simple: the full 55-level campaign, daily puzzle, and level editor live on iPhone.</p>
+      </div>
+    </section>
+
+    <section class="more-apps">
+      <div class="section-head" style="margin-top:0;padding-left:0"><h2>More Cylandea apps</h2></div>
+      <div class="row">
+        <a href="emoji-arena.html"><img src="apps/emoji-arena/emoji-arena-icon.png" alt="Emoji Arena app icon" width="42" height="42"/><span><b>Emoji Arena</b><br><span>Tic-Tac-Toe, Ultimate &amp; Gomoku</span></span></a>
+        <a href="balloon-bop.html"><img src="apps/balloon-bop/balloon-bop-icon.png" alt="Balloon Bop app icon" width="42" height="42"/><span><b>Balloon Bop</b><br><span>One-tap pixel arcade</span></span></a>
+      </div>
+    </section>
+
+    <section class="contact">
+      <p>Questions or feedback? Email <a href="mailto:support@cylandea.com">support@cylandea.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="flinks">
+      <a href="index.html">Home</a>
+      <a href="balloon-bop.html">Balloon Bop</a>
+      <a href="taploom.html">Taploom</a>
+      <a href="emoji-arena.html">Emoji Arena</a>
+      <a href="support.html">Support</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+    © <span id="year"></span> Cylandea Systems LLC. All rights reserved.
+  </footer>
+
+  <script src="stars.js"></script>
+</body>
+</html>
